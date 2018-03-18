@@ -14,10 +14,6 @@ class ProductCatagory(models.Model):
 	def __str__(self):
 		return self.product_type
 
-	def __init__(self, arg):
-		super(ProductCatagory, self).__init__()
-		self.arg = arg
-
 
 class OriginCity(models.Model):
 	name = models.CharField(max_length=100)
@@ -26,10 +22,6 @@ class OriginCity(models.Model):
 
 	def __str__(self):
 		return self.name
-
-	def __init__(self, arg):
-		super(OriginCity, self).__init__()
-		self.arg = arg
 
 
 class Portcity(models.Model):
@@ -41,10 +33,6 @@ class Portcity(models.Model):
 
 	def __str__(self):
 		return self.name
-
-	def __init__(self, arg):
-		super(Portcity, self).__init__()
-		self.arg = arg
 
 
 class DestinationCity(models.Model):
