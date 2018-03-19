@@ -43,5 +43,63 @@ class DestinationCity(models.Model):
 	def __str__(self):
 		return self.name
 	
+class OriginToPortRoad(models.Model):
+	city = models.ForeignKey(OriginCity)
+	port = models.ForeignKey(Portcity)
+
+	
+	class Meta:
+		unique_together = ('city','port')
 
 
+class OriginToPortRail(models.Model):
+	city = models.ForeignKey(OriginCity)
+	port = models.ForeignKey(Portcity)
+
+	
+	class Meta:
+		unique_together = ('city','port')
+
+
+class OriginToPortAir(models.Model):
+	city = models.ForeignKey(OriginCity)
+	port = models.ForeignKey(Portcity)
+
+	
+	class Meta:
+		unique_together = ('city','port')
+
+
+class PortToDestinationAir(models.Model):
+	city = models.ForeignKey(OriginCity)
+	port = models.ForeignKey(Portcity)
+
+	
+	class Meta:
+		unique_together = ('city','port')
+
+
+class PortToDestinationRoad(models.Model):
+	city = models.ForeignKey(OriginCity)
+	port = models.ForeignKey(Portcity)
+
+	
+	class Meta:
+		unique_together = ('city','port')
+
+
+class PortToDestinationSea(models.Model):
+	city = models.ForeignKey(OriginCity)
+	port = models.ForeignKey(Portcity)
+
+	
+	class Meta:
+		unique_together = ('city','port')
+
+
+class CalculatorData(models.Model):
+	origin_city = models.ForeignKey(OriginCity)
+	port_city = models.ForeignKey(Portcity)
+	destination_city = models.ForeignKey(DestinationCity)
+	product_catagory = models.ForeignKey(ProductCatagory)
+	# origin_to_port_method = models.IntegerField(choices=)
