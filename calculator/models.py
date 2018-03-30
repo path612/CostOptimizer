@@ -13,8 +13,8 @@ class ProductCatagory(models.Model):
 	transportable_by_air = models.BooleanField(default=True)
 	transportable_by_rail = models.BooleanField(default=True)
 
-	def __str__(self):
-		return self.product_type
+	# def __str__(self):
+	# 	return self.product_type
 
 
 class OriginCity(models.Model):
@@ -22,19 +22,19 @@ class OriginCity(models.Model):
 	latitude = models.DecimalField(max_digits=7, decimal_places=4)
 	longitude = models.DecimalField(max_digits=7, decimal_places=4)
 
-	def __str__(self):
-		return self.name
+	# def __str__(self):
+	# 	return self.name
 
 
-class Portcity(models.Model):
+class PortCity(models.Model):
 	name = models.CharField(max_length=100)
 	latitude = models.DecimalField(max_digits=7, decimal_places=4)
 	longitude = models.DecimalField(max_digits=7, decimal_places=4)
 	is_sea_port = models.BooleanField(default=True)
 	# handling_fare = models.DecimalField(decimal_places=2)
 
-	def __str__(self):
-		return self.name
+	# def __str__(self):
+	# 	return self.name
 
 
 class DestinationCity(models.Model):
@@ -42,15 +42,14 @@ class DestinationCity(models.Model):
 	latitude = models.DecimalField(max_digits=7, decimal_places=4)
 	longitude = models.DecimalField(max_digits=7, decimal_places=4)
 
-	def __str__(self):
-		return self.name
+	# def __str__(self):
+	# 	return self.name
 	
 class OriginToPortRoad(models.Model):
 	city = models.ForeignKey(OriginCity)
-	port = models.ForeignKey(Portcity)
+	port = models.ForeignKey(PortCity)
 	fare_20ST = models.DecimalField(max_digits=10,decimal_places=2)
 	fare_40ST = models.DecimalField(max_digits=10,decimal_places=2)
-	fare_box_density = models.DecimalField(max_digits=10, decimal_places=2)
 	fare_truck_50_CBM = models.DecimalField(max_digits=10,decimal_places=2)
 	fare_truck_70_CBM = models.DecimalField(max_digits=10,decimal_places=2)
 	fare_truck_90_CBM = models.DecimalField(max_digits=10,decimal_places=2)
@@ -64,7 +63,7 @@ class OriginToPortRoad(models.Model):
 
 class OriginToPortRail(models.Model):
 	city = models.ForeignKey(OriginCity)
-	port = models.ForeignKey(Portcity)
+	port = models.ForeignKey(PortCity)
 	fare_20ST = models.DecimalField(max_digits=10,decimal_places=2)
 	fare_40ST = models.DecimalField(max_digits=10,decimal_places=2)
 	fare_freight = models.DecimalField(max_digits=10,decimal_places=2)
@@ -80,7 +79,7 @@ class OriginToPortRail(models.Model):
 
 class OriginToPortAir(models.Model):
 	city = models.ForeignKey(OriginCity)
-	port = models.ForeignKey(Portcity)
+	port = models.ForeignKey(PortCity)
 	fare_box_density = models.DecimalField(max_digits=10, decimal_places=2)
 
 
@@ -89,14 +88,14 @@ class OriginToPortAir(models.Model):
 
 # class OriginToPort(object):
 # 	city = models.ForeignKey(OriginCity)
-# 	port = models.ForeignKey(Portcity)
+# 	port = models.ForeignKey(PortCity)
 # 	transportation_choice = models.IntegerField(choices=OriginToPortTransportationModeChoices)
 # 	container_type = models.IntegerField(default=1)
 
 
 class PortToDestinationAir(models.Model):
 	city = models.ForeignKey(DestinationCity)
-	port = models.ForeignKey(Portcity)
+	port = models.ForeignKey(PortCity)
 	fare_box_density = models.DecimalField(max_digits=10, decimal_places=2)
 	
 
@@ -106,10 +105,9 @@ class PortToDestinationAir(models.Model):
 
 class PortToDestinationRoad(models.Model):
 	city = models.ForeignKey(DestinationCity)
-	port = models.ForeignKey(Portcity)
+	port = models.ForeignKey(PortCity)
 	fare_20ST = models.DecimalField(max_digits=10,decimal_places=2)
 	fare_40ST = models.DecimalField(max_digits=10,decimal_places=2)
-	fare_box_density = models.DecimalField(max_digits=10, decimal_places=2)
 	fare_truck_50_CBM = models.DecimalField(max_digits=10,decimal_places=2)
 	fare_truck_70_CBM = models.DecimalField(max_digits=10,decimal_places=2)
 	fare_truck_90_CBM = models.DecimalField(max_digits=10,decimal_places=2)
@@ -121,10 +119,9 @@ class PortToDestinationRoad(models.Model):
 
 class PortToDestinationSea(models.Model):
 	city = models.ForeignKey(DestinationCity)
-	port = models.ForeignKey(Portcity)
+	port = models.ForeignKey(PortCity)
 	fare_20ST = models.DecimalField(max_digits=10,decimal_places=2)
 	fare_40ST = models.DecimalField(max_digits=10,decimal_places=2)
-	fare_box_density = models.DecimalField(max_digits=10, decimal_places=2)
 	fare_bulk_20k_DWT = models.DecimalField(max_digits=10, decimal_places=2)
 	fare_bulk_40k_DWT = models.DecimalField(max_digits=10, decimal_places=2)
 	fare_bulk_70k_DWT = models.DecimalField(max_digits=10, decimal_places=2)
@@ -150,7 +147,6 @@ def help_domestic_container_choices():
 		(3, "Truck 50CBM"),
 		(4, "Truck 70CBM"),
 		(5, "Truck 90CBM"),
-		(6, "Crates"),
 		)
 
 
@@ -176,7 +172,6 @@ def help_foreign_container_choices():
 		(3, "Truck 50CBM"),
 		(4, "Truck 70CBM"),
 		(5, "Truck 90CBM"),
-		(6, "Crates"),
 		)
 
 
@@ -187,18 +182,17 @@ def help_foreign_container_choices():
 	
 class CalculatorData(models.Model):
 	origin_city = models.ForeignKey(OriginCity)
-	port_city = models.ForeignKey(Portcity)
+	port_city = models.ForeignKey(PortCity)
 	destination_city = models.ForeignKey(DestinationCity)
 	product_catagory = models.ForeignKey(ProductCatagory)
-	origin_to_port_method = models.IntegerField(choices=OriginToPortTransportationModeChoices)
-	origin_to_port_container_type = models.IntegerField(choices = RailModeChoices)
-	port_to_dest_container_type = models.IntegerField(choices = WaterModeChoices)
-	port_to_dest_method = models.IntegerField(choices=PortToDestinationTransportationModeChoices)
 	manufacturing_fare = models.DecimalField(max_digits=10,decimal_places=2)
+	origin_to_port_method = models.IntegerField(choices=OriginToPortTransportationModeChoices)
+	origin_to_port_container_type = models.IntegerField(default=1)
+	port_to_dest_container_type = models.IntegerField(default=1)
+	port_to_dest_method = models.IntegerField(choices=PortToDestinationTransportationModeChoices)
 	origin_to_port_fare = models.DecimalField(max_digits=10,decimal_places=2)
 	port_to_dest_fare = models.DecimalField(max_digits=10,decimal_places=2)
-
-	def __init__(self, *args, **kwargs):
-		super(CalculatorData, self).__init__(*args, **kwargs)
-		self._meta.get_field_by_name('origin_to_port_container_type')[0]._choices = lazy(help_domestic_container_choices,list)()
-		self._meta.get_field_by_name('port_to_dest_container_type')[0]._choices = lazy(help_foreign_container_choices,list)()
+	gst_fare = models.DecimalField(max_digits=10,decimal_places=2)
+	customs_fare = models.DecimalField(max_digits=10,decimal_places=2)
+	insurance_fare = models.DecimalField(max_digits=10,decimal_places=2)
+	total_fare = models.DecimalField(max_digits=10,decimal_places=2)

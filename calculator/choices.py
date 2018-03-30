@@ -28,7 +28,6 @@ RoadModeChoices = (
 	(3, "Truck 50CBM"),
 	(4, "Truck 70CBM"),
 	(5, "Truck 90CBM"),
-	(6, "Crates"),
 	)
 
 
@@ -42,5 +41,4 @@ WaterModeChoices = (
 	(3, "Bulk 20k DWT"),
 	(4, "Bulk 40k DWT"),
 	(5, "Bulk 70k DWT"),
-	(6, "Crates"),
 	)

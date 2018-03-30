@@ -1,0 +1,11 @@
+{
+	"origin_city": 2,
+	"port_city": 2,
+	"destination_city": 1,
+	"product_catagory": 2,
+	"origin_to_port_method": 1,
+	"origin_to_port_container_type": 1,
+	"port_to_dest_method": 2,
+	"port_to_dest_container_type": 3,
+	"manufacturing_fare": 20000.00
+}

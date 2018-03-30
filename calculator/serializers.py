@@ -1,7 +1,7 @@
 from .models import CalculatorData
 from rest_framework import serializers
 
-class CalculatorSerializer(serializers.HyperlinkedModelSerializer):
+class CalculatorSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = CalculatorData
 		fields = (
@@ -15,3 +15,9 @@ class CalculatorSerializer(serializers.HyperlinkedModelSerializer):
 			'port_to_dest_container_type',
 			'manufacturing_fare'
 			)
+
+
+class CalculatorFullSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = CalculatorData
+		fields = '__all__'
