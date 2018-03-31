@@ -9,7 +9,11 @@ from rest_framework.renderers import JSONRenderer
 # Create your views here.
 
 class Calculator(APIView):
-	
+	def get(self, request, format=None):
+		calc_datas = CalculatorData.objects.all()
+		serializer = CalculatorFullSerializer(calc_datas, many=True)
+		return Response(serializer.data)
+
 	def post(self, request, format=None):
 		serializer = CalculatorSerializer(data = request.data)
 		print(serializer)
