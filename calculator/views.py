@@ -16,9 +16,7 @@ class Calculator(APIView):
 
 	def post(self, request, format=None):
 		serializer = CalculatorSerializer(data = request.data)
-		print(serializer)
 		if serializer.is_valid():
-			print(serializer)
 			calcobj = CalculatorData()
 			szr = serializer.data
 			# print("Fare: " + origin_port_fare(serializer))
